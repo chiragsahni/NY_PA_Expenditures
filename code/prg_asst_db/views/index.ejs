@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Public Assistance Cases</title>
+  </head>
+
+  <body>
+    <form action="/" method="POST">
+      <label>District Name</label>
+      <input
+        type="text"
+        name="district_name"
+        placeholder="Enter District Name"
+        style="width: 10%"
+      />
+      <a href="/districts" target="_blank">List of Districts</a>
+
+      <label>Assistance Category</label>
+      <select class="dropdown" name="asst_category">
+        <option value="Select">Select</option>
+        <option value="family_asst_fed">Federal Family Assistance</option>
+        <option value="safety_net_asst">Safety Net Assistance</option>
+        <option value="safety_net_asst_fed">
+          Federal Safety Net Assistance
+        </option>
+        <option value="safety_net_asst_non_fed">
+          Non-Federal Safety Net Assistance
+        </option>
+        <option value="maintenance_of_effort">Maintenance of Effort</option>
+        <option value="non_maintenance_of_effort">
+          Non-Maintenance of Effort
+        </option>
+      </select>
+
+      <label>Year(YYYY)</label>
+      <input
+        type="number"
+        name="year"
+        min="2002"
+        max="2021"
+        placeholder="Between 2002 and 2021"
+        style="width: 10%"
+      />
+
+      <label>Month</label>
+      <select class="dropdown" name="month_name">
+        <option value="Select">Select</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <h3><%=heading %></h3>
+
+    <!-- Number of Rows Table -->
+
+    <% if (total_rows_query_output.length > 0 && zero_query_output.length > 0 &&
+    non_zero_query_output.length > 0) { %>
+    <h5>NUMBER OF ROWS</h5>
+    <table border="1">
+      <tr>
+        <th align="center"></th>
+        <th align="center">Number of Rows</th>
+      </tr>
+      <tr>
+        <td align="center">Zero</td>
+        <td align="center"><%= zero_query_output[0].count %></td>
+      </tr>
+      <tr>
+        <td align="center">Non-Zero</td>
+        <td align="center"><%= non_zero_query_output[0].count %></td>
+      </tr>
+      <tr>
+        <td align="center">Total</td>
+        <td align="center"><%= total_rows_query_output[0].count %></td>
+      </tr>
+    </table>
+    <% } %>
+
+    <!-- Statistics Table -->
+
+    <% if (max_query_output.length > 0 && min_query_output.length > 0 &&
+    sum_avg_query_output.length > 0) { %>
+    <h5>MAGIC NUMBERS</h5>
+    <table border="1">
+      <tr>
+        <th align="center">Stat</th>
+        <th align="center">Year</th>
+        <th align="center">Month</th>
+        <th align="center">District</th>
+        <th align="center">Category</th>
+        <th align="center">Total Expenditure</th>
+      </tr>
+      <tr>
+        <td align="center">Max</td>
+        <td align="center"><%= max_query_output[0].year %></td>
+        <td align="center"><%= max_query_output[0].month_name %></td>
+        <td align="center"><%= max_query_output[0].district_name %></td>
+        <td align="center"><%= max_query_output[0].asst_category %></td>
+        <td align="center"><%= max_query_output[0].total_expenditure %></td>
+      </tr>
+      <tr>
+        <td align="center">Min</td>
+        <td align="center"><%= min_query_output[0].year %></td>
+        <td align="center"><%= min_query_output[0].month_name %></td>
+        <td align="center"><%= min_query_output[0].district_name %></td>
+        <td align="center"><%= min_query_output[0].asst_category %></td>
+        <td align="center"><%= min_query_output[0].total_expenditure %></td>
+      </tr>
+      <tr>
+        <td align="center">Sum</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"><%= sum_avg_query_output[0].sum_total_expenditure %></td>
+      </tr>
+      <tr>
+        <td align="center">Average</td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center">
+          <%= Math.round(sum_avg_query_output[0].avg_total_expenditure) %>
+        </td>
+      </tr>
+    </table>
+    <% } %>
+
+    <h3><%=record_heading %></h3>
+
+    <% if (asst_data.length> 0) { %>
+    <table border="1">
+      <tr>
+        <th align="center">Year</th>
+        <th align="center">Month</th>
+        <th align="center">District</th>
+        <th align="center">Category</th>
+        <th align="center">No. Of Cases</th>
+        <th align="center">Newly Opened Cases (from MongoDB)</th>
+        <th align="center">No. Of Recipients</th>
+        <th align="center">Total Expenditure ($)</th>
+      </tr>
+      <% for(var i=0; i < asst_data.length; i++) {%> <% if
+      (asst_data[i].total_expenditure != 0) {%>
+      <tr>
+        <td align="center"><%= asst_data[i].year %></td>
+        <td align="center"><%= asst_data[i].month_name %></td>
+        <td align="center"><%= asst_data[i].district_name %></td>
+        <td align="center"><%= asst_data[i].asst_category %></td>
+        <td align="center"><%= asst_data[i].number_of_cases %></td>
+        <td align="center"><%= asst_data[i].total_openings %></td>
+        <td align="center"><%= asst_data[i].total_recipients %></td>
+        <td align="center"><%= asst_data[i].total_expenditure %></td>
+      </tr>
+      <% } %> <% } %>
+    </table>
+    <% } %>
+  </body>
+</html>
