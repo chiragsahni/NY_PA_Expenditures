@@ -81,6 +81,9 @@ insert_records_in_postgres(district_lookup_df, 'district_lookup')
 
 
 # Prepare and insert data in main table in Postgres
+# As per the feedback from the professor, the main table is created
+# by introducing a new column 'asst_category' from our side which
+# gives information about the assistance category.
 asst_df = pd.DataFrame()
 asst_table_cols = ['year','month_code','district_code','number_of_cases','total_recipients','children_recipients','adult_recipients','total_expenditure','asst_category']
 asst_df = asst_df.append(create_assistance_df([0,2,3,10,11,12,13,14], 'family_asst_fed'))

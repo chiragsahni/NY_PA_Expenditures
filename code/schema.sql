@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS district_lookup (
     district_name VARCHAR(15)
 );
 
-
+-- Main table consisting data for PA after categorizing it in 'load_data.py' file
 DROP TABLE IF EXISTS public_asst_expenditures;
 CREATE TABLE IF NOT EXISTS public_asst_expenditures (
     year INT,
@@ -52,3 +52,6 @@ CREATE TABLE IF NOT EXISTS public_asst_expenditures (
     CONSTRAINT month_check CHECK (month_code > 0 AND month_code < 13),
     CONSTRAINT district_check CHECK (district_code > 0 AND district_code < 67)
 );
+
+-- Insert Admin role into user_info table
+INSERT INTO user_info VALUES ('Admin', 'admin');

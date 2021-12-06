@@ -59,7 +59,7 @@ app.post("/home", async (req, res) => {
   // SQL query to store user information
   // Handled SQL injection as the input for user_name is a type-in field
   pool.query({ 
-    text: "INSERT INTO user_info VALUES($1,'user') ON CONFLICT (userid) DO NOTHING", 
+    text: "INSERT INTO user_info VALUES($1,'guest_user') ON CONFLICT (userid) DO NOTHING", 
     values: [`${logged_user_name}`]
  }).then(results => {
   res.render("index.ejs", {
