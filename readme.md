@@ -1,8 +1,8 @@
 # New York Public Assistance Cses
 
-Our project focuses on the data exploration for Public Assistance (PA) Caseloads and Expenditures from 2002 to till date for the state of New York.
+This web application focuses on the data exploration for Public Assistance (PA) Caseloads and Expenditures from 2002 to till date for the state of New York.
 These data are monthly listings of cases, recipients and expenditures in the categories of various Assistance Programs.
-We also included a supplement dataset to fulfill the graduate requirement and this supplement dataset provides the number of PA case openings in each month for each Local Social Services District (SSD).
+I also included a supplement dataset which provides the number of PA case openings in each month for each Local Social Services District (SSD).
 
 GitHub Repository - https://github.com/chiragsahni/NY_PA_Expenditures
 
@@ -32,7 +32,7 @@ Both the datasets used are open datasets i.e. they are publicly available and ar
 
 ## Run
 
-We have prepared a bash script `application.sh` which takes care of all the setup stuff:
+I have prepared a bash script `application.sh` which takes care of all the setup stuff:
 
 1. Executes `setup.sql` file for setting up Postgres database using Postgres user. It creates the required Postgres database and the user.
 
@@ -85,5 +85,3 @@ Enjoy the Application on Link: `http://localhost:3002`
         c. Table consisting of top 100 records from the fetched dataset. One of the columns in this table is fetched from the supplement dataset stored in MongoDB.
 
 The user can explore for multiple combinations of the parameters without refreshing the application.
-
-### Request you to please be patient after hitting the Submit button because the application takes around 4-5 seconds to fetch and display the data.
